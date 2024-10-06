@@ -1,0 +1,103 @@
+[gd_scene load_steps=14 format=3 uid="uid://dty1lbyuisv5h"]
+
+[ext_resource type="Texture2D" uid="uid://365c83hih7v" path="res://Sprites/Night-Sky.png" id="1_yfvdt"]
+[ext_resource type="Texture2D" uid="uid://dnb06nxritg6u" path="res://Sprites/Full-moon.png" id="2_b14p3"]
+[ext_resource type="Texture2D" uid="uid://b8hhnpf00exbh" path="res://Sprites/cherry-blossom.png" id="3_7a83a"]
+[ext_resource type="Texture2D" uid="uid://bemxu20kt8bha" path="res://Sprites/circle-512.png" id="3_67di8"]
+[ext_resource type="Texture2D" uid="uid://fngwqwx7ynoy" path="res://Sprites/Mount_Fuji.png" id="4_2mwar"]
+[ext_resource type="Texture2D" uid="uid://cnx6xm337p825" path="res://Sprites/Grass.png" id="5_a75kx"]
+[ext_resource type="Texture2D" uid="uid://dvrhhdol3dp4h" path="res://Sprites/cloud_shape3_1.png" id="6_g4ptf"]
+[ext_resource type="Texture2D" uid="uid://8opom6vdyuri" path="res://Sprites/cloud_shape4_2.png" id="7_phbm2"]
+[ext_resource type="Texture2D" uid="uid://bdk1yah2emevl" path="res://Sprites/clouds_shape8_5.png" id="8_4ew6i"]
+[ext_resource type="Texture2D" uid="uid://dab2vldtnfnde" path="res://Sprites/White-square.png" id="8_uvwi2"]
+[ext_resource type="Shader" path="res://Shaders/WaterShader.gdshader" id="10_2f8p5"]
+[ext_resource type="Texture2D" uid="uid://y68c5w6ytyhq" path="res://Sprites/Grass_occluder.png" id="12_4kw4e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p08sx"]
+shader = ExtResource("10_2f8p5")
+shader_parameter/water_color = Color(0, 0, 1, 1)
+shader_parameter/reflection_limit = 1.0
+
+[node name="Sakura" type="Node2D"]
+
+[node name="Night-sky" type="Sprite2D" parent="."]
+position = Vector2(575, 156.437)
+scale = Vector2(1.4016, 0.924906)
+texture = ExtResource("1_yfvdt")
+
+[node name="MountFuji" type="Sprite2D" parent="."]
+light_mask = 4
+visibility_layer = 4
+z_index = 40
+position = Vector2(961, 294)
+scale = Vector2(0.561667, 0.563011)
+texture = ExtResource("4_2mwar")
+
+[node name="Full-moon" type="Sprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+z_index = 10
+position = Vector2(726, 170)
+texture = ExtResource("2_b14p3")
+
+[node name="PointLight2D" type="PointLight2D" parent="Full-moon"]
+energy = 0.21
+texture = ExtResource("3_67di8")
+
+[node name="Grass" type="Sprite2D" parent="."]
+light_mask = 8
+visibility_layer = 8
+z_index = 100
+position = Vector2(702, 385)
+scale = Vector2(0.682658, 0.419531)
+texture = ExtResource("5_a75kx")
+
+[node name="Cherry-blossom" type="Sprite2D" parent="."]
+light_mask = 16
+visibility_layer = 16
+z_index = 200
+position = Vector2(283, 209)
+scale = Vector2(0.595833, 0.595833)
+texture = ExtResource("3_7a83a")
+
+[node name="CloudShape31" type="Sprite2D" parent="."]
+light_mask = 64
+visibility_layer = 64
+z_index = 20
+texture_filter = 2
+position = Vector2(102.566, 125.5)
+scale = Vector2(2.55469, 2.55469)
+texture = ExtResource("6_g4ptf")
+
+[node name="CloudShape42" type="Sprite2D" parent="."]
+light_mask = 64
+visibility_layer = 64
+z_index = 30
+position = Vector2(200, 206)
+scale = Vector2(2.31383, 2.31383)
+texture = ExtResource("7_phbm2")
+
+[node name="CloudsShape85" type="Sprite2D" parent="."]
+light_mask = 64
+visibility_layer = 64
+z_index = 50
+position = Vector2(404, 217)
+scale = Vector2(2.41263, 2.92647)
+texture = ExtResource("8_4ew6i")
+
+[node name="Water" type="Sprite2D" parent="."]
+light_mask = 32
+visibility_layer = 32
+z_index = 1000
+material = SubResource("ShaderMaterial_p08sx")
+position = Vector2(574.5, 556.5)
+scale = Vector2(1.40118, 0.264706)
+texture = ExtResource("8_uvwi2")
+
+[node name="GrassOccluder" type="Sprite2D" parent="."]
+light_mask = 8
+visibility_layer = 8
+z_index = 1100
+position = Vector2(702, 469)
+scale = Vector2(0.716466, 0.486842)
+texture = ExtResource("12_4kw4e")
