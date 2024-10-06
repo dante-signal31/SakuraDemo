@@ -16,7 +16,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p08sx"]
 shader = ExtResource("10_2f8p5")
 shader_parameter/water_color = Color(0, 0, 1, 1)
-shader_parameter/reflection_limit = 1.0
+shader_parameter/reflection_limit = 0.66
 
 [node name="Sakura" type="Node2D"]
 
