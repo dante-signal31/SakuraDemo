@@ -2,7 +2,7 @@ shader_type canvas_item;
 uniform sampler2D screen_texture: hint_screen_texture;
 uniform vec4 water_color: source_color;
 uniform float water_color_intensity: hint_range(0.0, 1.0, 0.01) = 0.7;
-uniform float mirrored_colors_intensity = 1.4;
+uniform float mirrored_colors_intensity: hint_range(0.0, 1.0, 0.01) = 0.5;
 uniform float reflection_limit: hint_range(0.0, 1.0, 0.01);
 
 vec2 get_mirrored_coordinate(vec2 currentUV, vec2 currentScreenUV){
@@ -16,23 +16,17 @@ vec2 get_mirrored_coordinate(vec2 currentUV, vec2 currentScreenUV){
 }
 
 vec4 get_resulting_water_color(vec4 mirrored_color, vec2 currentUV){
-	// Improve mirrored clear colors to make them more visible.
-	float mirrored_color_average = (
-		mirrored_color.r + 
-		mirrored_color.g + 
-		mirrored_color.b) / 
-		3.0;
-	float highlight_factor = pow(
-		mirrored_color_average, 
-		mirrored_colors_intensity);
+	// Enlighten mirrored colors to make them more visible.
+	vec4 highlighted_color = 
+		mirrored_color * (1.0 + mirrored_colors_intensity);
+	highlighted_color = clamp(highlighted_color, vec4(0,0,0,0), vec4(1,1,1,1));
 	// The more to the bottom of the water rectangle, the more water color we 
 	// want.
-	// TODO: This is not working as intended. A higher highlight factor should get more intense colors. Now it's happening the oppposite.
 	float water_color_mix = clamp(
-		currentUV.y - highlight_factor, 
+		currentUV.y, 
 		0.0, 
 		water_color_intensity);
-	return mix(mirrored_color, water_color, water_color_mix);
+	return mix(highlighted_color, water_color, water_color_mix);
 }
 
 void fragment() {
