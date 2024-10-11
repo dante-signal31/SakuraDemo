@@ -27,14 +27,6 @@ position = Vector2(575, 156.437)
 scale = Vector2(1.4016, 0.924906)
 texture = ExtResource("1_yfvdt")
 
-[node name="MountFuji" type="Sprite2D" parent="."]
-light_mask = 4
-visibility_layer = 4
-z_index = 40
-position = Vector2(961, 294)
-scale = Vector2(0.561667, 0.563011)
-texture = ExtResource("4_2mwar")
-
 [node name="Full-moon" type="Sprite2D" parent="."]
 light_mask = 2
 visibility_layer = 2
@@ -45,6 +37,39 @@ texture = ExtResource("2_b14p3")
 [node name="PointLight2D" type="PointLight2D" parent="Full-moon"]
 energy = 0.21
 texture = ExtResource("3_67di8")
+
+[node name="MountFuji" type="Sprite2D" parent="."]
+light_mask = 4
+visibility_layer = 4
+z_index = 40
+position = Vector2(961, 294)
+scale = Vector2(0.561667, 0.563011)
+texture = ExtResource("4_2mwar")
+
+[node name="CloudShape31" type="Sprite2D" parent="."]
+light_mask = 64
+visibility_layer = 64
+z_index = 50
+texture_filter = 2
+position = Vector2(102.566, 125.5)
+scale = Vector2(2.55469, 2.55469)
+texture = ExtResource("6_g4ptf")
+
+[node name="CloudShape42" type="Sprite2D" parent="."]
+light_mask = 64
+visibility_layer = 64
+z_index = 60
+position = Vector2(200, 206)
+scale = Vector2(2.31383, 2.31383)
+texture = ExtResource("7_phbm2")
+
+[node name="CloudsShape85" type="Sprite2D" parent="."]
+light_mask = 64
+visibility_layer = 64
+z_index = 70
+position = Vector2(404, 217)
+scale = Vector2(2.41263, 2.92647)
+texture = ExtResource("8_4ew6i")
 
 [node name="Grass" type="Sprite2D" parent="."]
 light_mask = 8
@@ -61,31 +86,6 @@ z_index = 200
 position = Vector2(283, 209)
 scale = Vector2(0.595833, 0.595833)
 texture = ExtResource("3_7a83a")
-
-[node name="CloudShape31" type="Sprite2D" parent="."]
-light_mask = 64
-visibility_layer = 64
-z_index = 20
-texture_filter = 2
-position = Vector2(102.566, 125.5)
-scale = Vector2(2.55469, 2.55469)
-texture = ExtResource("6_g4ptf")
-
-[node name="CloudShape42" type="Sprite2D" parent="."]
-light_mask = 64
-visibility_layer = 64
-z_index = 30
-position = Vector2(200, 206)
-scale = Vector2(2.31383, 2.31383)
-texture = ExtResource("7_phbm2")
-
-[node name="CloudsShape85" type="Sprite2D" parent="."]
-light_mask = 64
-visibility_layer = 64
-z_index = 50
-position = Vector2(404, 217)
-scale = Vector2(2.41263, 2.92647)
-texture = ExtResource("8_4ew6i")
 
 [node name="Water" type="Sprite2D" parent="."]
 light_mask = 32
