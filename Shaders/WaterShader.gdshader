@@ -36,18 +36,27 @@ vec4 get_resulting_water_color(vec4 mirrored_color, vec2 currentUV){
 	return mix(highlighted_color, water_color, water_color_mix);
 }
 
-void fragment() {
-	float wave_strength_by_distance = clamp(UV.y/wave_threshold, 0, 1);
-	vec2 water_wave_offset = texture(wave_noise, UV + TIME * wave_speed).rg * 
+vec2 get_wave_offset(vec2 currentUV, float currentTime){
+	// Waves will get its full distortion strength when UV.y gets wave_threshold.
+	// This way points near up border will get a very reduced offset.
+	float wave_strength_by_distance = clamp(currentUV.y/wave_threshold, 0, 1);
+	vec2 water_wave_offset = texture(wave_noise, currentUV + currentTime * wave_speed).rg * 
 	wave_strength_by_distance * 
 	wave_strength;
+	return water_wave_offset;
+}
+
+void fragment() {
+	vec2 water_wave_offset = get_wave_offset(UV, TIME);
 	
 	vec2 uv = get_mirrored_coordinate(UV, SCREEN_UV);
+	
 	// Get the reflected color.
 	// WARNING: This sampling will only get colors printed on screen so far. So
 	// it will only get colors from sprites with a Z-Index below the Z-Index of
 	// this material's node.
 	vec4 mirrored_color = texture(screen_texture, uv + water_wave_offset);
+	
 	// Mix the mirrored color with water color to get the final resulting color.
 	COLOR = get_resulting_water_color(mirrored_color, UV);
 }
