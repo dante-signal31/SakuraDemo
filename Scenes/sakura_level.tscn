@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dty1lbyuisv5h"]
+[gd_scene load_steps=16 format=3 uid="uid://dty1lbyuisv5h"]
 
 [ext_resource type="Texture2D" uid="uid://365c83hih7v" path="res://Sprites/Night-Sky.png" id="1_yfvdt"]
 [ext_resource type="Texture2D" uid="uid://dnb06nxritg6u" path="res://Sprites/Full-moon.png" id="2_b14p3"]
@@ -13,12 +13,24 @@
 [ext_resource type="Shader" path="res://Shaders/WaterShader.gdshader" id="10_2f8p5"]
 [ext_resource type="Texture2D" uid="uid://y68c5w6ytyhq" path="res://Sprites/Grass_occluder.png" id="12_4kw4e"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p8hcb"]
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wqt07"]
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_p8hcb")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p08sx"]
 shader = ExtResource("10_2f8p5")
 shader_parameter/water_color = Color(0, 0, 1, 1)
 shader_parameter/water_color_intensity = 0.66
 shader_parameter/mirrored_colors_intensity = 0.16
 shader_parameter/reflection_limit = 0.66
+shader_parameter/wave_strength = 0.02
+shader_parameter/wave_threshold = 0.11
+shader_parameter/wave_speed = 0.01
+shader_parameter/wave_noise = SubResource("NoiseTexture2D_wqt07")
 
 [node name="Sakura" type="Node2D"]
 
