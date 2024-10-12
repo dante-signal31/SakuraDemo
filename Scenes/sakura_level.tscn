@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dty1lbyuisv5h"]
+[gd_scene load_steps=18 format=3 uid="uid://dty1lbyuisv5h"]
 
 [ext_resource type="Texture2D" uid="uid://365c83hih7v" path="res://Sprites/Night-Sky.png" id="1_yfvdt"]
 [ext_resource type="Texture2D" uid="uid://dnb06nxritg6u" path="res://Sprites/Full-moon.png" id="2_b14p3"]
@@ -10,8 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://8opom6vdyuri" path="res://Sprites/cloud_shape4_2.png" id="7_phbm2"]
 [ext_resource type="Texture2D" uid="uid://bdk1yah2emevl" path="res://Sprites/clouds_shape8_5.png" id="8_4ew6i"]
 [ext_resource type="Texture2D" uid="uid://dab2vldtnfnde" path="res://Sprites/White-square.png" id="8_uvwi2"]
+[ext_resource type="Shader" path="res://Shaders/Tree.gdshader" id="9_g7w06"]
 [ext_resource type="Shader" path="res://Shaders/WaterShader.gdshader" id="10_2f8p5"]
 [ext_resource type="Texture2D" uid="uid://y68c5w6ytyhq" path="res://Sprites/Grass_occluder.png" id="12_4kw4e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4lej6"]
+shader = ExtResource("9_g7w06")
+shader_parameter/wind_strength = 0.1
+shader_parameter/horizontal_offset = 0.02
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_p8hcb"]
 frequency = 0.03
@@ -95,6 +101,7 @@ texture = ExtResource("5_a75kx")
 light_mask = 16
 visibility_layer = 16
 z_index = 200
+material = SubResource("ShaderMaterial_4lej6")
 position = Vector2(283, 209)
 scale = Vector2(0.595833, 0.595833)
 texture = ExtResource("3_7a83a")
