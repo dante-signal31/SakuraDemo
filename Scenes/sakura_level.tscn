@@ -21,7 +21,7 @@
 shader = ExtResource("9_g7w06")
 shader_parameter/wind_strength = 0.04
 shader_parameter/horizontal_offset = 0.104
-shader_parameter/time = 2.25963
+shader_parameter/time = 813.018
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q2m36"]
 light_mode = 1
@@ -35,9 +35,10 @@ lifetime_randomness = 0.07
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(100, 0, 0)
 emission_shape = 1
-emission_sphere_radius = 230.0
-gravity = Vector3(0, 60, 0)
-scale_min = 0.05
+emission_sphere_radius = 220.0
+spread = 85.619
+gravity = Vector3(0, 50, 0)
+scale_min = 0.03
 scale_max = 0.05
 anim_speed_min = 1.0
 anim_speed_max = 1.0
@@ -138,14 +139,16 @@ _flowersEmitter = NodePath("GPUParticles2D")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Cherry-blossom"]
 material = SubResource("CanvasItemMaterial_q2m36")
-position = Vector2(0, -518.602)
-amount = 10
+position = Vector2(11.4103, -518.602)
+amount = 5
 process_material = SubResource("ParticleProcessMaterial_qvbb5")
 texture = ExtResource("12_vjvyw")
 lifetime = 3.0
-visibility_rect = Rect2(-1500, -800, 4000, 2000)
+visibility_rect = Rect2(-1500, -300, 7000, 1300)
 script = ExtResource("12_77k7t")
-HorizontalOffset = -0.044
+_oscillationMultiplier = 400.0
+WindStrength = 0.04
+HorizontalOffset = 0.104
 
 [node name="Water" type="Sprite2D" parent="."]
 light_mask = 32
