@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://365c83hih7v" path="res://Sprites/Night-Sky.png" id="1_yfvdt"]
 [ext_resource type="Texture2D" uid="uid://dnb06nxritg6u" path="res://Sprites/Full-moon.png" id="2_b14p3"]
-[ext_resource type="Texture2D" uid="uid://b8hhnpf00exbh" path="res://Sprites/cherry-blossom.png" id="3_7a83a"]
 [ext_resource type="Texture2D" uid="uid://bemxu20kt8bha" path="res://Sprites/circle-512.png" id="3_67di8"]
 [ext_resource type="Texture2D" uid="uid://fngwqwx7ynoy" path="res://Sprites/Mount_Fuji.png" id="4_2mwar"]
 [ext_resource type="Texture2D" uid="uid://cnx6xm337p825" path="res://Sprites/Grass.png" id="5_a75kx"]
@@ -12,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dab2vldtnfnde" path="res://Sprites/White-square.png" id="8_uvwi2"]
 [ext_resource type="Shader" path="res://Shaders/Tree.gdshader" id="9_g7w06"]
 [ext_resource type="Shader" path="res://Shaders/WaterShader.gdshader" id="10_2f8p5"]
+[ext_resource type="Texture2D" uid="uid://b42etshxmr8tt" path="res://Sprites/cherry-blossom_2.png" id="10_f2ugf"]
 [ext_resource type="Script" path="res://Scripts/Tree.cs" id="11_8rifx"]
 [ext_resource type="Texture2D" uid="uid://y68c5w6ytyhq" path="res://Sprites/Grass_occluder.png" id="12_4kw4e"]
 [ext_resource type="Script" path="res://Scripts/LeafEmitter.cs" id="12_77k7t"]
@@ -19,9 +19,10 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4lej6"]
 shader = ExtResource("9_g7w06")
-shader_parameter/wind_strength = 0.04
-shader_parameter/horizontal_offset = 0.104
-shader_parameter/time = 813.018
+shader_parameter/wind_strength = 0.31
+shader_parameter/horizontal_offset = 0.36
+shader_parameter/maximum_oscillation_amplitude = 100.0
+shader_parameter/time = 405.206
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q2m36"]
 light_mode = 1
@@ -127,19 +128,20 @@ light_mask = 16
 visibility_layer = 16
 z_index = 200
 material = SubResource("ShaderMaterial_4lej6")
-position = Vector2(279, 450)
+position = Vector2(381, 498)
 scale = Vector2(0.595833, 0.595833)
-texture = ExtResource("3_7a83a")
+texture = ExtResource("10_f2ugf")
 centered = false
 offset = Vector2(-540, -810)
 script = ExtResource("11_8rifx")
-WindStrength = 0.04
-HorizontalOffset = 0.104
+WindStrength = 0.31
+HorizontalOffset = 0.36
 _flowersEmitter = NodePath("GPUParticles2D")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Cherry-blossom"]
+visible = false
 material = SubResource("CanvasItemMaterial_q2m36")
-position = Vector2(11.4103, -518.602)
+position = Vector2(99.1377, -518.602)
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_qvbb5")
 texture = ExtResource("12_vjvyw")
@@ -147,8 +149,8 @@ lifetime = 3.0
 visibility_rect = Rect2(-1500, -300, 7000, 1300)
 script = ExtResource("12_77k7t")
 _oscillationMultiplier = 400.0
-WindStrength = 0.04
-HorizontalOffset = 0.104
+WindStrength = 0.31
+HorizontalOffset = 0.36
 
 [node name="Water" type="Sprite2D" parent="."]
 light_mask = 32

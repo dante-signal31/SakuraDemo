@@ -59,8 +59,9 @@ public partial class Tree : Sprite2D
         get => _time;
         set
         { 
+            if (_treeShader == null) return;
             _treeShader.SetShaderParameter(TimeParameterName, value);
-            _flowersEmitter.Time = value;
+            if (_flowersEmitter != null) _flowersEmitter.Time = value;
             _time = value;
         }
     }
