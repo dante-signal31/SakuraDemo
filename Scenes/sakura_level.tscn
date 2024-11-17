@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dty1lbyuisv5h"]
+[gd_scene load_steps=36 format=3 uid="uid://dty1lbyuisv5h"]
 
 [ext_resource type="Texture2D" uid="uid://365c83hih7v" path="res://Sprites/Night-Sky.png" id="1_yfvdt"]
 [ext_resource type="Texture2D" uid="uid://dnb06nxritg6u" path="res://Sprites/Full-moon.png" id="2_b14p3"]
@@ -22,7 +22,7 @@ shader = ExtResource("9_g7w06")
 shader_parameter/wind_strength = 0.631
 shader_parameter/horizontal_offset = 0.36
 shader_parameter/maximum_oscillation_amplitude = 100.0
-shader_parameter/time = 834.016
+shader_parameter/time = 3665.54
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q2m36"]
 light_mode = 1
@@ -99,6 +99,7 @@ curve_y = SubResource("Curve_yxjoi")
 curve_z = SubResource("Curve_xmgxi")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q7hiu"]
+lifetime_randomness = 0.22
 particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(700, 1, 1)
@@ -107,6 +108,28 @@ scale_min = 0.2
 scale_over_velocity_curve = SubResource("CurveXYZTexture_fegfb")
 color_initial_ramp = SubResource("GradientTexture1D_eeugp")
 alpha_curve = SubResource("CurveTexture_581da")
+collision_mode = 2
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 1
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ovqpi"]
+polygon = PackedVector2Array(-1, 502, 442, 480, 503, 469, 1151, 461, 1151, 646, -2, 648)
+
+[sub_resource type="Curve" id="Curve_8xp4m"]
+_data = [Vector2(0, 0), 0.0, 3.42857, 0, 0, Vector2(0.513158, 0.725275), 0.0, 0.0, 0, 0, Vector2(1, 0.010989), -3.35582, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8iixo"]
+curve = SubResource("Curve_8xp4m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_onrq8"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 500, 0)
+alpha_curve = SubResource("CurveTexture_8iixo")
 
 [node name="Sakura" type="Node2D"]
 
@@ -185,8 +208,8 @@ _flowersEmitter = NodePath("GPUParticles2D")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Cherry-blossom"]
 material = SubResource("CanvasItemMaterial_q2m36")
-position = Vector2(-269.553, -615.944)
-amount = 1
+position = Vector2(-166.235, -615.944)
+amount = 9
 process_material = SubResource("ParticleProcessMaterial_qvbb5")
 texture = ExtResource("12_vjvyw")
 lifetime = 3.0
@@ -220,7 +243,24 @@ visibility_layer = 128
 z_index = 1200
 position = Vector2(567, -13)
 amount = 1000
+sub_emitter = NodePath("../RainSplash")
 process_material = SubResource("ParticleProcessMaterial_q7hiu")
 lifetime = 0.7
 preprocess = 0.5
+collision_base_size = 6.49
 visibility_rect = Rect2(-600, -100, 1210, 800)
+
+[node name="WaterRainCollider" type="LightOccluder2D" parent="."]
+process_mode = 4
+visible = false
+light_mask = 128
+visibility_layer = 128
+occluder = SubResource("OccluderPolygon2D_ovqpi")
+
+[node name="RainSplash" type="GPUParticles2D" parent="."]
+light_mask = 128
+visibility_layer = 128
+z_index = 1300
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_onrq8")
+lifetime = 0.2
