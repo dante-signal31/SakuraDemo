@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dty1lbyuisv5h"]
+[gd_scene load_steps=32 format=3 uid="uid://dty1lbyuisv5h"]
 
 [ext_resource type="Texture2D" uid="uid://365c83hih7v" path="res://Sprites/Night-Sky.png" id="1_yfvdt"]
 [ext_resource type="Texture2D" uid="uid://dnb06nxritg6u" path="res://Sprites/Full-moon.png" id="2_b14p3"]
@@ -22,7 +22,7 @@ shader = ExtResource("9_g7w06")
 shader_parameter/wind_strength = 0.631
 shader_parameter/horizontal_offset = 0.36
 shader_parameter/maximum_oscillation_amplitude = 100.0
-shader_parameter/time = 1291.9
+shader_parameter/time = 834.016
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q2m36"]
 light_mode = 1
@@ -63,6 +63,50 @@ shader_parameter/wave_strength = 0.02
 shader_parameter/wave_threshold = 0.11
 shader_parameter/wave_speed = 0.01
 shader_parameter/wave_noise = SubResource("NoiseTexture2D_wqt07")
+
+[sub_resource type="Curve" id="Curve_jaf0e"]
+max_value = 0.3
+_data = [Vector2(0, 0), 0.0, 1.87912, 0, 0, Vector2(0.5, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.89702, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_581da"]
+curve = SubResource("Curve_jaf0e")
+
+[sub_resource type="Gradient" id="Gradient_ueafk"]
+colors = PackedColorArray(1, 1, 1, 0.0784314, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eeugp"]
+gradient = SubResource("Gradient_ueafk")
+
+[sub_resource type="Curve" id="Curve_u8oyw"]
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_yxjoi"]
+max_value = 30.0
+_data = [Vector2(0, 15.1648), 0.0, 140.934, 0, 0, Vector2(0.25, 30), 0.0, 0.0, 0, 0, Vector2(1, 30), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_xmgxi"]
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_fegfb"]
+curve_x = SubResource("Curve_u8oyw")
+curve_y = SubResource("Curve_yxjoi")
+curve_z = SubResource("Curve_xmgxi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q7hiu"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(700, 1, 1)
+gravity = Vector3(0, 3000, 0)
+scale_min = 0.2
+scale_over_velocity_curve = SubResource("CurveXYZTexture_fegfb")
+color_initial_ramp = SubResource("GradientTexture1D_eeugp")
+alpha_curve = SubResource("CurveTexture_581da")
 
 [node name="Sakura" type="Node2D"]
 
@@ -141,8 +185,8 @@ _flowersEmitter = NodePath("GPUParticles2D")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Cherry-blossom"]
 material = SubResource("CanvasItemMaterial_q2m36")
-position = Vector2(-258.067, -615.944)
-amount = 2
+position = Vector2(-269.553, -615.944)
+amount = 1
 process_material = SubResource("ParticleProcessMaterial_qvbb5")
 texture = ExtResource("12_vjvyw")
 lifetime = 3.0
@@ -169,3 +213,14 @@ z_index = 1100
 position = Vector2(702, 469)
 scale = Vector2(0.716466, 0.486842)
 texture = ExtResource("12_4kw4e")
+
+[node name="Rain" type="GPUParticles2D" parent="."]
+light_mask = 128
+visibility_layer = 128
+z_index = 1200
+position = Vector2(567, -13)
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_q7hiu")
+lifetime = 0.7
+preprocess = 0.5
+visibility_rect = Rect2(-600, -100, 1210, 800)
